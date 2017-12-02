@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <title>Emotional Rollercoaster</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css?family=Indie+Flower" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="giphy.js"></script>
+</head>
+
+<body>
+  <nav class="navbar navbar-default">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"
+          aria-expanded="false">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="#">All the Feels</a>
+      </div>
+
+      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        <form class="navbar-form navbar-right">
+          <div class="form-group">
+            <input type="text" id="searchField" class="form-control" placeholder="Search a Feeling">
+          </div>
+          <button type="submit" id="submitBtn" class="btn btn-default">Get Emotional</button>
+        </form>
+      </div>
+    </div>
+  </nav>
+
+  <div class="contentContainer">
+    <div class="row">
+      <div id="btnsHere" class="col-xs-5"></div>
+      <div class="col-xs-7">
+        <div class="row">
+          <div id="emotionDiv" class="col-xs-12"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+
+</html>
