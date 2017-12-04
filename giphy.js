@@ -14,40 +14,29 @@ $(document).ready(function () {
 
     $(".emotion").on("click", function () {
         var searchTerm = $(this).attr("data-name");
-        console.log(searchTerm);
         var queryURL = "https://api.giphy.com/v1/gifs/search";
 
         $.ajax({
-        url: queryURL,
-        method: "GET",
-        data: {
-            q: searchTerm,
-            api_key: "EiUEVleCpKoSRlSJK8Z7BMD3sxjCIhKQ",
-            limit: 10
-                }
-    }).done(function (response) {
-        var results = response.data;
-        console.log(results);
+            url: queryURL,
+            method: "GET",
+            data: {
+                q: searchTerm,
+                api_key: "EiUEVleCpKoSRlSJK8Z7BMD3sxjCIhKQ",
+                limit: 10
+            }
+        }).done(function (response) {
+            var results = response.data;
 
-        // var pRating = $("<p>").text("Rating: " + results.rating);
-        // var emotionImage = $("<img>");
-        // emotionImage.attr("src", results.images.fixed_height.url);
-        // $("<p>").append(emotionImage);
-        // $("#emotionDiv").append(emotionImage);
-    });
+            for (var i = 0, len = results.length; i < len; i++) {
+                var rating = results[i].rating;
+                var pRating = $("<p>").text("Rating: " + rating);
 
-                //             //use the API documentation to get the image of the response
-                //             var imageUrl = response.data.image_original_url;
+                var emotionGif = $("<img>");
+                emotionGif.attr("src", results[i].images.fixed_height.url);
 
-                //             //create image element where image of response will be displayed
-                //             var frustratedGif = $("<img>");
-
-                //             //give image attributes to display image or alt text
-                //             frustratedGif.attr("src", imageUrl);
-                //             frustratedGif.attr("alt", "frustrated gif");
-
-                //             //add the new element before the images div
-                //             $("#images").prepend(frustratedGif);
-                //           });
+                $("#emotionDiv").append(pRating);
+                $("#emotionDiv").append(emotionGif);
+            }
+        });
     });
 });
