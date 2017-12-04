@@ -1,6 +1,9 @@
+body {
+    background-image: url("images/shinycolorsbkg.jpg");
+}
+
 a.navbar-brand {
     font-family: 'Indie Flower', cursive;
-    color: #4fa683;
     font-size: 34px;
 }
 
