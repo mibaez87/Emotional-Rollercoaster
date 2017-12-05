@@ -11,9 +11,14 @@ a.navbar-brand {
     background-color: rgba(52,152,219,0.6)
 }
 
-#submitBtn {
+#submitBtn,
+p {
     font-family: 'Indie Flower', cursive;
     font-size: 16px;
+}
+
+p {
+    color: white;
 }
 
 #searchField {
