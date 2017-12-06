@@ -18,48 +18,63 @@ $(document).ready(function () {
 
     //function to get and display gif images from API
     function getGiphy() {
-    //create event listener for each button
-    $(document).on("click", ".emotion", function () {
-        //make sure div where gifs will appear is empty
-        $("#emotionDiv").empty();
-        //create variable and assign attribute to capture user input
-        var searchTerm = $(this).attr("data-name");
-        //create variable with API url for search
-        var queryURL = "https://api.giphy.com/v1/gifs/search";
-        //use ajax to make a call and get the data from API
-        $.ajax({
-            url: queryURL,
-            method: "GET",
-            //pass specific data parameters including what we are searching and how many results to return
-            data: {
-                q: searchTerm,
-                api_key: "EiUEVleCpKoSRlSJK8Z7BMD3sxjCIhKQ",
-                limit: 10
-            }
-        }).done(function (response) {
-            //create variable to capture results
-            var results = response.data;
-            //craete for loop to capture each of the images
-            for (var i = 0, len = results.length; i < len; i++) {
-                //create div to hold gifs
-                var gifDiv = $("<div>").addClass("gif");
-                //create variable to capture the rating of each image
-                var rating = results[i].rating;
-                //create p div to display rating
-                var pRating = $("<p>").text("Rating: " + rating);
-                //create img div to hold the image
-                var emotionGif = $("<img>");
-                //add attirubte of image source so it knows which image to display
-                emotionGif.attr("src", results[i].images.fixed_height.url);
-                //add the displayed rating then the gif to the assigned div for capturing images
-                gifDiv.append(pRating);
-                gifDiv.append(emotionGif);
-                //add to HTML div to display
-                $("#emotionDiv").append(gifDiv);
-            }
+        //create event listener for each button
+        $(document).on("click", ".emotion", function () {
+            //make sure div where gifs will appear is empty
+            $("#emotionDiv").empty();
+            //create variable and assign attribute to capture user input
+            var searchTerm = $(this).attr("data-name");
+            //create variable with API url for search
+            var queryURL = "https://api.giphy.com/v1/gifs/search";
+            //use ajax to make a call and get the data from API
+            $.ajax({
+                url: queryURL,
+                method: "GET",
+                //pass specific data parameters including what we are searching and how many results to return
+                data: {
+                    q: searchTerm,
+                    api_key: "EiUEVleCpKoSRlSJK8Z7BMD3sxjCIhKQ",
+                    limit: 10
+                }
+            }).done(function (response) {
+                //create variable to capture results
+                var results = response.data;
+                //craete for loop to capture each of the images
+                for (var i = 0, len = results.length; i < len; i++) {
+                    //create div to hold gifs
+                    var gifDiv = $("<div>").addClass("gif");
+                    //create variable to capture the rating of each image
+                    var rating = results[i].rating;
+                    //create p div to display rating
+                    var pRating = $("<p>").text("Rating: " + rating);
+                    //create img div to hold the image
+                    var emotionGif = $("<img id='gifImage'>");
+                    //add attirubte of image source so it knows which image to display
+                    emotionGif.attr("src", results[i].images.fixed_height_still.url);
+                    emotionGif.attr("data-still", results[i].images.fixed_height_still.url);
+                    emotionGif.attr("data-animate", results[i].images.fixed_height.url);
+                    emotionGif.attr("data-state", "still");
+                    //add the displayed rating then the gif to the assigned div for capturing images
+                    gifDiv.append(pRating);
+                    gifDiv.append(emotionGif);
+                    //add to HTML div to display
+                    $("#emotionDiv").append(gifDiv);
+                }
+            });
         });
-    });
     }
+    //create event listener for each image to move and stop moving
+    $(document).on("click", "#gifImage", function () {
+        var state = $(this).attr("data-state");
+        if (state === "still") {
+            $(this).attr("src", $(this).attr("data-animate"));
+            $(this).attr("data-state", "animate");
+        } else {
+            $(this).attr("src", $(this).attr("data-still"));
+            $(this).attr("data-state", "still");
+        }
+    });
+
     //create event listener specific to the user search button
     $("#submitBtn").on("click", function (event) {
         event.preventDefault();
